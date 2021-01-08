@@ -105,12 +105,11 @@ This test suite expects following environment variables set:
  - `STORAGE_API_MAINTENANCE_URL` - URL for maintenance testing (https://maintenance-testing.keboola.com/)
 
 
-You can export variables manually or you can create and fill file `set-env.sh` as copy of attached `set-env.template.sh`.
+You can export variables manually, or you can create and fill file `set-env.sh` as copy of attached `set-env.template.sh`.
 
-Than  you can run tests:
+Then you can run tests:
 
-`source ./set-env.sh &&  docker-compose run --rm dev vendor/bin/phpunit --testsuite common`
-
+`source ./set-env.sh &&  docker-compose run --rm dev vendor/bin/phpunit --testsuite common` 
  
 ### Redshift backend test suite
 
@@ -155,7 +154,16 @@ Than  you can run tests:
 
 `source ./set-env.mixed.sh && docker-compose run --rm dev vendor/bin/phpunit --testsuite backend-mixed'`
 
+## Running test from PHPStorm
 
+The whole test suite is quite big and it can take few hours. So it is a good idea to run just a testcase which you are interested in from [PHPStorm](https://blog.jetbrains.com/phpstorm/2017/07/new-docker-compose-support-in-phpstorm-2017-2/).
+- go to Settings / Languages & Frameworks / PHP
+- row CLI -> three dots
+- Plus button -> `From Docker, Vagrant, VM, WSL, Remote...`
+- Select `Docker Compose`; Service `dev-xdebug`; Environment variables define value from your `set-env.php`
+    - an easy way how to do it is copy content of `set-env.php` without `export ` prefix -> click on the icon in  Env. vars. -> click on the paste icon. It should pass all the key=value entries in the window. If it doesn't work, set them manually.
+- Set Path mappings to `<Project root> -> /code` (`<Project root>` is an absolute path to the project directory) 
+- hint: create different interpreters for different environments
 
 ## Versioning
 [semver.org](http://semver.org/) is followed.
